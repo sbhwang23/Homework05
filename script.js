@@ -19,11 +19,9 @@ $(document).ready(function() {
     
         $('.saveBtn').on('click', function(e) {
             e.preventDefault();
-           
             let textInput = $(this).siblings('.description').val();
             let time = $(this).parent().attr('id');
             localStorage.setItem(time, textInput);
-           
             alert("Saved!");
         })
 
