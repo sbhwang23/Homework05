@@ -1,41 +1,50 @@
+
 $(document).ready(function() {  
-
-let hoursAm = [9, 10, 11]
-let hoursPm = [12, 1, 2, 3, 4, 5]
-let currentHour = moment().hours();
-let timeFrame = $('.time-block').text();
-
-
-    function clock() {
-        let currentDate = (moment().format('MMMM Do YYYY, h:mm:ss a'));
-        $('#currentDay').html(currentDate);
-    }
-    setInterval(clock, 1000);
-
-    $.each(hoursAm, function(i, time) {
-        $('.container').append('<div class= "row hour"> <div class= "col-1 time-block">' + time + ' AM' + '</div>' + '<textarea class= "col-10 description"></textarea>' + '<button class= "col-1 saveBtn">' + 'Save' + '</button> </div>')
-    })
     
-    $.each(hoursPm, function(i, time) {
-        $('.container').append('<div class= "row hour"> <div class= "col-1 time-block">' + time + ' PM' + '</div>' + '<textarea class= "col-10 description"></textarea>' + '<button class= "col-1 saveBtn">' + 'Save' + '</button> </div>')
-    })
-
-    $('.saveBtn').on('click', function(e) {
-        e.preventDefault();
-        let textInput = $(this).siblings('textarea').val();
-        let time = $(this).siblings('.time-block').text();
-        localStorage.setItem(time, textInput);
-    })
-
-    $('.time-block').each(function() {
-        if (timeFrame < currentHour) {
-            $('.description').addClass('past');
-        } else if (timeFrame === currentHour) {
-            $('.description').removeClass('past');
-            $('.description').addClass('present');
-        } else {
-            $('.description').removeClass('present');
-            $('.description').addClass('future');
+        function clock() {
+            let currentDate = (moment().format('MMMM Do YYYY, h:mm:ss a'));
+            $('#currentDay').html(currentDate);
         }
+        setInterval(clock, 1000);
+        
+        $('#9 .description').val(localStorage.getItem('9'));
+        $('#10 .description').val(localStorage.getItem('10'));
+        $('#11 .description').val(localStorage.getItem('11'));
+        $('#12 .description').val(localStorage.getItem('12'));
+        $('#13 .description').val(localStorage.getItem('13'));
+        $('#14 .description').val(localStorage.getItem('14'));
+        $('#15 .description').val(localStorage.getItem('15'));
+        $('#16 .description').val(localStorage.getItem('16'));
+        $('#17 .description').val(localStorage.getItem('17'));
+    
+        $('.saveBtn').on('click', function(e) {
+            e.preventDefault();
+           
+            let textInput = $(this).siblings('.description').val();
+            let time = $(this).parent().attr('id');
+            localStorage.setItem(time, textInput);
+           
+            alert("Saved!");
+        })
+
+        
+        $('.time-block').each(function() {
+            let currentTime = moment().hour();
+            let timeBlock = $(this).attr('id');
+            
+            if(timeBlock < currentTime) {
+                $(this).addClass('past');
+            } else if (timeBlock === currentTime) {
+                $(this).addClass('present');
+                $(this).removeClass('past');
+            } else {
+                $(this).addClass('future');
+                $(this).removeClass('present');
+                $(this).removeClass('past');
+            }
+
+        })
+        
     })
-})
+   
+    
