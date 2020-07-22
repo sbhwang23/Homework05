@@ -5,3 +5,4 @@ When the scheduler is opened, the top will display the current day and time. Eac
 The Moments.js library is used to display the date and time. 
 
 [Work Day Scheduler](https://sbhwang23.github.io/Homework05/)
+![](WorkDaySchedulerScreenshot.PNG)
