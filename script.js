@@ -24,17 +24,17 @@ $(document).ready(function() {
             localStorage.setItem(time, textInput);
             alert("Saved!");
         })
-
-        
+       
         $('.time-block').each(function() {
             let currentTime = moment().hour();
             let timeBlock = $(this).attr('id');
             
             if(timeBlock < currentTime) {
                 $(this).addClass('past');
-            } else if (timeBlock === currentTime) {
+            } else if (timeBlock == currentTime) {
                 $(this).addClass('present');
                 $(this).removeClass('past');
+                $(this).removeClass('future');
             } else {
                 $(this).addClass('future');
                 $(this).removeClass('present');
